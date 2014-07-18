@@ -117,7 +117,15 @@ What are limitations of your work and open research questions for future work?
 </pre>
 
 
-                    <h2 id="hypothesis">Hypothesis</h2>
+
+                    <h2 id="research">Research design</h2>
+<p>Research problem: Why do machines have a difficulty in revealing meaningful correlations or establishing a non-coincidental connection between variables in statistical datasets?</p>
+
+
+<p>What are the fundamental components for measuring semantic similarity, which will lead to building strong relationships between the correlations of linked statistical datasets?</p>
+
+
+                    <h3 id="hypothesis">Hypothesis</h3>
                     <div about="[this:#hypothesis-null]" typeof="sio:SIO_000284">
                         <p property="rdfs:label">H&#8320; There exists no significant relationship between the semantic similarity and the correlation of linked statistical datasets, because information on why datasets are similar is unavailable.</p>
                         <span about="[this:#variable-semantic-similarity-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="semantic similarity"></span><span about="[this:#variable-correlation-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="correlation"></span>
@@ -127,6 +135,8 @@ What are limitations of your work and open research questions for future work?
                         <p property="rdfs:label">H&#8321; There may be an unknown relationship.</p>
                     </div>
  
+It is up to us to be critical of the correlations that we see.
+
 
 
                     <h2 id="background">Background and Related Work</h2>
@@ -158,7 +168,7 @@ What are limitations of your work and open research questions for future work?
                     <p>An <em>LSD Sense</em> workflow is as follows:</p>
 
                     <ol typeof="opmw:WorkflowTemplate">
-                        <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Hypothesis</li>
+                        <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create Hypothesis</li>
                         <li about="[this:#workflow-configure]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Determine datasets and configurations</li>
                         <li about="[this:#workflow-metadata]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
                         <li>Get each dataset's observations.</li>
@@ -166,7 +176,8 @@ What are limitations of your work and open research questions for future work?
                         <li>Create dataset metadata subset for semantic similarity.</li>
                         <li>Create semantic similarity for each dataset pair combination.</li>
                         <li>Create correlation and other analysis.</li>
-                        <li>Interpret analysis and validate hypothesis.</li>
+                        <li>Test and verify hypothesis.</li>
+                        <li>Analysis.</li>
                     </ol>
 
 <p>With the exception of determining which datasets to inspect,and the system configuration, the LSD Sense implementation is automated.</p>
