@@ -127,7 +127,7 @@ What are limitations of your work and open research questions for future work?
 
                     <h3 id="hypothesis">Hypothesis</h3>
                     <div about="[this:#hypothesis-null]" typeof="sio:SIO_000284">
-                        <p property="rdfs:label">H&#8320; There exists no significant relationship between the semantic similarity and the correlation of linked statistical datasets, because information on why datasets are similar is unavailable.</p>
+                        <p property="rdfs:label">H&#8320; There exists no significant relationship between the semantic similarity and the correlation of linked statistical datasets, because information on why datasets are similar or connected is unavailable.</p>
                         <span about="[this:#variable-semantic-similarity-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="semantic similarity"></span><span about="[this:#variable-correlation-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="correlation"></span>
                     </div>
 
@@ -143,8 +143,7 @@ What are limitations of your work and open research questions for future work?
 
                     <p><a href="http://www.ke.tu-darmstadt.de/bibtex/attachments/single/310">Generating Possible Interpretations for Statistics from Linked Open Data</a> [<a href="#r_19">19</a>] talks about <a href="http://www.ke.tu-darmstadt.de/resources/explain-a-lod">Explain-a-LOD</a> [<a href="#r_20">20</a>] tool which focuses on generating hypotheses that explain statistics. It has a configuration to compare two variables, and then provides possible interpretations of the correlation analysis for users to review.</p>
 
-                    <p><a href="http://tylervigen.com/">Spurious Correlations</a> [<a href="#r_"></a>] reveals correlations that are not genuine for practical use. It emphasizes on the importance for humans to be critical of random correlations, and to investigate whether there is a  connection between the variables.</p>
-
+                    <p><a href="http://tylervigen.com/">Spurious Correlations</a> [<a href="#r_"></a>] reveals correlations that are not genuine for practical use. In other words, the correlations are type I errors. It emphasizes on the importance for humans to be critical of random correlations, and to investigate whether there is a direct relation between the variables.</p>
 
 
                     <h2 id="lsd-analysis">Analysis of Linked Statistical Data</h2>
@@ -152,51 +151,39 @@ What are limitations of your work and open research questions for future work?
 
 
                     <h3 id="workflow">Workflow</h3>
-<div about="[this:#workflow]">
-<a rel="opmw:hasTemplateDiagram" resource="/figure_workflow.svg">Figure</a>
+                    <div about="[this:#workflow]">
+                        <a rel="opmw:hasTemplateDiagram" resource="/figure_workflow.svg">Figure</a>
 
-<p>
-1. I take the datasets that have an observation for the reference period 2013. Initially, there are 1406 datasets available that has at least one observation for the year 2013. The correlation is computed by first taking two of those datasets and joining them on the reference area, and using their measure values for the correlation calculation using kendall (assuming here that the relationships are non-linear). So, we get a table with header: refArea, obsValue.x, obsValue.y (the obValue.x is coming from one dataset, and obsValue.y from the other dataset). I do this for each dataset combination. For the output, I have a list for datasetX, datasetY, correlation, p-value, n. datasetX and datasetY are just the identifiers for the datasets. I filter out the rows that has n &lt; 10, reason being that, it is probably not significant enough. I don't exactly know what is significant for sure. The population size i.e., the number of potential reference areas that can have an observation is 260. That's the number of reference area codes in their classification, but it is not necessarily the case that every dataset has anything for all of those reference areas. The possible number of reference areas per dataset is unknown. I'm not sure what to do about this. Any ideas? In any case, for now, I throw out n &lt; 10 (that's the number after the join took place for the correlation). I deal with the rest later i.e., I can increase this if I need to.
-</p>
+                        <p>An <em>LSD Sense</em> workflow is as follows:</p>
 
-<p>
-2. Before doing the semantic similarity, I first take a unique list of the dataset identifiers from datasetX and datasetY so that what's to be checked for their similarity is for those datasets. At this point, the list of unique datasets is 402. The similarity is based on titles of the datasets. They are in short sentences e.g., "Mortality rate, infant (per 1,000 live births)". After some minor clean-up, it turns into "Mortality rate infant". World Bank happens to put the attribute value in the brackets in a lot of the cases. I figure that this is not that interesting for the similarity so I throw that out. It is also very possible to come across datasets that differ only by one word e.g., "male" or "female", or age "0-16" or "17-25" etc. The semantic similarity algorithm is based on a "latent semantic index". Essentially it puts each dataset title into a cluster. The number of clusters can be adjusted. Right now, it is using default 200. Hard to qualify what it "should be". I'll have to test. It gives back an output for datasetX, datasetY, similarity. The similarity value ranges from -1 to 1, similar to correlation values.
-</p>
+                        <ol typeof="opmw:WorkflowTemplate">
+                            <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create Hypothesis</li>
+                            <li about="[this:#workflow-configure]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Determine datasets and configurations</li>
+                            <li about="[this:#workflow-metadata]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
+                            <li>Get each dataset's observations.</li>
+                            <li>Create correlations and other analysis for each dataset pair combination.</li>
+                            <li>Create dataset metadata subset for semantic similarity.</li>
+                            <li>Create semantic similarity for each dataset pair combination.</li>
+                            <li>Create correlation and other analysis.</li>
+                            <li>Test and verify hypothesis.</li>
+                            <li>Analysis.</li>
+                        </ol>
 
-<p>
-3. Lastly, I (currently, until I investigate further as you've suggested) filter out similarity values with 0 or 1 (after getting their absolute). And correlation values from the other table with 0 or 1 (after getting their absolute), as well as the p-values > 0.05. Thinking that the p-values above that value is not significant enough. The final scatter plot is created joining the table with correlations (datasetX, datasetY, correlation, pValue, n) with the table for similarities (datasetX, datasetY, similarity). Naturally, the join is on datasetX, datasetY, taking similarity and correlation values as the x and y values respectively. Correlation method is again based on kendall. Since I'm not doing any model fitting, I'm not interested in which gets to be x or y. 
-</p>
+                        <p>With the exception of determining which datasets to inspect, and the system configuration, the LSD Sense implementation is automated.</p>
 
-                    <p>An <em>LSD Sense</em> workflow is as follows:</p>
-
-                    <ol typeof="opmw:WorkflowTemplate">
-                        <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create Hypothesis</li>
-                        <li about="[this:#workflow-configure]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Determine datasets and configurations</li>
-                        <li about="[this:#workflow-metadata]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
-                        <li>Get each dataset's observations.</li>
-                        <li>Create correlations and other analysis for each dataset pair combination.</li>
-                        <li>Create dataset metadata subset for semantic similarity.</li>
-                        <li>Create semantic similarity for each dataset pair combination.</li>
-                        <li>Create correlation and other analysis.</li>
-                        <li>Test and verify hypothesis.</li>
-                        <li>Analysis.</li>
-                    </ol>
-
-<p>With the exception of determining which datasets to inspect,and the system configuration, the LSD Sense implementation is automated.</p>
-
-</div>
-
-
-
-                    <h3 id="requirements">Functional Requirements</h3>
-                    <p></p>
-
+                   </div>
 
 
                     <h3 id="experiment">Experiment</h3>
                     <div about="[this:#experiment]" typeof="http://semanticscience.org/resource/SIO_000994">
-                        <p></p>
-                    
+                        <p>The workflow of our experiment can be summarized as follows:</p>
+                        <ol>
+                        <li><strong>Correlations for each dataset pair:</strong> We retrieved the 2013 World Bank Indicators datasets, 1406 in total, using SPARQL queries from http://worldbank.270a.info/. The correlations were computed using R, the statistical software, by joining each dataset pair by their reference area (one of the dimensions of dataset structure), and using their measure values for the correlation calculation with the kendall method - the assumption here is that the relationships are non-linear. The information on the analysis we generated consisted of the following headers: <code>datasetX</code>, <code>datasetY</code>, <code>correlation</code>, <code>p-value</code>, <code>n</code>, where <code>datasetX</code> and <code>datasetY</code> are the identifiers for each dataset pair that is being comparied. We filtered sample values, <code>n &lt; 10</code>, for the reason being that the sample was not significant enough. The population size i.e., the number of potential reference areas that can have an observation is 260 in theory. That is the number of reference area codes in World Bank classification, however, it is not known as to which reference areas may occur in a given dataset before hand i.e., this information is not publicly available. In any case, we retain majority of the values, leaving us with the possibility to filter more out if we need to.</li>
+
+                        <li><strong>Semantic similarity for each dataset pair:</strong>: Before doing the semantic similarity, we first took an unique list of the dataset identifiers from datasetX and datasetY so that what is to be checked for their similarity is only in relation to those datasets. At this point, the list of unique datasets is 401. The similarity was measured based on dataset titles. They are in short sentences e.g., <q>Mortality rate, infant (per 1,000 live births)</q>. After minor preprocessing e.g., removal of the text pertaining the unit within brackets, it was left with the essence of the dataset title e.g., <q>Mortality rate, infant</q>. The semantic similarity algorithm is based on <em>Latent Semantic Analysis</em>. Essentially it puts each dataset title into a cluster (default 200). The resulting headers of the output was: <code>datasetX</code>, <code>datasetY</code>, <code>similarity</code>.</li>
+
+                        <li><strong>Correlation analysis between semantic similarity and correlation of datasets</strong>: Lastly, we took the absolute values for both variables; <code>|similarity|</code>, <code>|correlation|</code>. We the filtered both similarity and correlation values with 0 or 1, as well as correlation values with <code>p-values > 0.05</code>. For the former, our reason was to exclude potential outliers, or misleading perfect relations, and to exclude insignificant correlations. The final scatter plot is created by joining the similarity and correlation tables by joining on datasetX and datasetY columns, and with resulting headers: <code>datasetX</code>, <code>datasetY</code>, <code>similarity</code>, <code>correlation</code>, <code>p-value</code>, <code>n</code>. Finally the correlation of the final data table was conducted using the kendall method. As we were not modeling the relationship (line fitting), we decided to use similarity as the independent variable, and the correlation as the dependent variable.</li>
+                        </ol>
                     </div>
 
                     <h3 id="data-requirements">Data Requirements</h3>
@@ -241,16 +228,7 @@ About the datasets: they contain two dimensions; reference area, reference perio
 <li id="r_13">qb.js, <a rel="dcterms:references" href="http://orion.tw.rpi.edu/~jimmccusker/qb.js/">http://orion.tw.rpi.edu/~jimmccusker/qb.js/</a></li>
 <li id="r_19">Paulheim, H.: Generating Possible Interpretations for Statistics from Linked Open Data, ESWC (2012), <a rel="dcterms:references" href="http://www.ke.tu-darmstadt.de/bibtex/attachments/single/310">http://www.ke.tu-darmstadt.de/bibtex/attachments/single/310</a></li>
 <li id="r_20">Explain-a-LOD, <a rel="dcterms:references" href="http://www.ke.tu-darmstadt.de/resources/explain-a-lod">http://www.ke.tu-darmstadt.de/resources/explain-a-lod</a></li>
-<li id="r_26">Transparency International, <a rel="dcterms:references" href="http://transparency.270a.info/">http://transparency.270a.info/</a></li>
-<li id="r_27">Food and Agriculture Organization of the United Nations, <a rel="dcterms:references" href="http://fao.270a.info/">http://fao.270a.info/</a></li>
-<li id="r_28">Organisation for Economic Co-operation and Development, <a rel="dcterms:references" href="http://oecd.270a.info/">http://oecd.270a.info/</a></li>
 <li id="r_29">World Bank, <a rel="dcterms:references" href="http://worldbank.270a.info/">http://worldbank.270a.info/</a></li>
-<li id="r_30">European Central Bank, <a rel="dcterms:references" href="http://ecb.270a.info/">http://ecb.270a.info/</a></li>
-<li id="r_31">International Monetary Fund, <a rel="dcterms:references" href="http://imf.270a.info/">http://imf.270a.info/</a></li>
-<li id="r_32">Apache Jena, <a rel="dcterms:references" href="http://jena.apache.org/">http://jena.apache.org/</a></li>
-<li id="r_33">Jena TDB, <a rel="dcterms:references" href="http://jena.apache.org/documentation/tdb/index.html">http://jena.apache.org/documentation/tdb/index.html</a></li>
-<li id="r_34">Jena TDB Optimizer, <a rel="dcterms:references" href="http://jena.apache.org/documentation/tdb/optimizer.html">http://jena.apache.org/documentation/tdb/optimizer.html</a></li>
-<li id="r_35">Jena Fuseki, <a rel="dcterms:references" href="https://jena.apache.org/documentation/serving_data/">https://jena.apache.org/documentation/serving_data/</a></li>
 <li id="r_42">LSD Analysis code at GitHub, <a rel="dcterms:references" href="https://github.com/csarven/lsd-analysis">https://github.com/csarven/lsd-analysis</a></li>
                     </ol>
                     </div>
