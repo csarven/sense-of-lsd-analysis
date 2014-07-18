@@ -89,7 +89,7 @@
                 <div property="dcterms:description" id="content" class="entry-content">
                     <div property="dcterms:abstract" id="abstract" class="entry-summary">
                         <h2>Abstract</h2>
-                        <p>By testing different datasets and sections, the ongoing hypothesis will be to see whether the strength of the correlations between the datasets have anything to do with the degree of their semantic similarity.</p>
+                        <p>The ongoing research problem is to investigate why machines have a difficulty in revealing meaningful correlations or establishing non-coincidental connection between variables in statistical datasets.</p>
                     </div>
 
                     <div id="keywords">
@@ -116,24 +116,24 @@ How did you evaluate your results?
 What are limitations of your work and open research questions for future work?
 </pre>
 
+                    <p>With this work, ...</p>
 
 
                     <h2 id="research">Research design</h2>
-<p>Research problem: Why do machines have a difficulty in revealing meaningful correlations or establishing a non-coincidental connection between variables in statistical datasets?</p>
+                    <p><strong>Research problem</strong>: Why do machines have difficulty in revealing meaningful correlations or establishing non-coincidental connection between variables in statistical datasets?</p>
 
-
-<p>What are the fundamental components for measuring semantic similarity, which will lead to building strong relationships between the correlations of linked statistical datasets?</p>
-
+                    <p>Over this ongoing investigation, we hope to uncover some of the fundamental components for measuring or declaring semantic similarity between datasets, in order to better predict strong relationships that are relevant.</p>
 
                     <h3 id="hypothesis">Hypothesis</h3>
-                    <div about="[this:#hypothesis-null]" typeof="sio:SIO_000284">
-                        <p property="rdfs:label">H&#8320; There exists no significant relationship between the semantic similarity and the correlation of linked statistical datasets, because information on why datasets are similar or connected is unavailable.</p>
-                        <span about="[this:#variable-semantic-similarity-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="semantic similarity"></span><span about="[this:#variable-correlation-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="correlation"></span>
-                    </div>
+                    <p>Given our research question, we would like to propose a viable research hypothesis:</p>
 
-                    <div about="[this:#hypothesis-alternative]" typeof="sio:SIO_000284">
-                        <p property="rdfs:label">H&#8321; There may be an unknown relationship.</p>
-                    </div>
+                    <p about="[this:#hypothesis-alternative]" typeof="sio:SIO_000284" property="rdfs:label">H&#8321; If the absence of semantically rich connection between datasets is inadequate to distinguish meaningful relationships, then making relevant information about dataset connectivity will improve predicting dataset correlations by observing their semantic similarity.</p>
+
+                    <p>In which we can start our investigation with the following null hypothesis:</p>
+
+                    <p about="[this:#hypothesis-null]" typeof="sio:SIO_000284" property="rdfs:label">H&#8320; There exists no significant relationship between the semantic similarity and the correlation of statistical datasets, because information on why datasets are similar or connected is unavailable.</p>
+                    <span about="[this:#variable-semantic-similarity-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="semantic similarity"></span><span about="[this:#variable-correlation-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="correlation"></span>
+
 
 
                     <h2 id="methodology">Methodology</h2>
@@ -142,10 +142,10 @@ What are limitations of your work and open research questions for future work?
                     <div about="[this:#workflow]">
                         <a rel="opmw:hasTemplateDiagram" resource="/figure_workflow.svg">Figure</a>
 
-                        <p>An <em>LSD Sense</em> workflow is as follows:</p>
+                        <p>We have adopted the following workflow:</p>
 
                         <ol typeof="opmw:WorkflowTemplate">
-                            <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create Hypothesis</li>
+                            <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create hypothesis</li>
                             <li about="[this:#workflow-configure]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Determine datasets and configurations</li>
                             <li about="[this:#workflow-metadata]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
                             <li>Get each dataset's observations.</li>
@@ -156,20 +156,20 @@ What are limitations of your work and open research questions for future work?
                             <li>Test and verify hypothesis.</li>
                             <li>Analysis.</li>
                         </ol>
+                    </div>
 
-                        <p>With the exception of determining which datasets to inspect, and the system configuration, the LSD Sense implementation is automated.</p>
 
-                   </div>
-
+                    <h3 id="implementation">Implementation</h3>
+                    <p>We have an implementation, LSD Sense [] of the workflow above which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
 
                     <h2 id="experiment">Experiment</h2>
                     <div about="[this:#experiment]" typeof="http://semanticscience.org/resource/SIO_000994">
                         <p>Two experiments were conducted using the same workflow. Experiments differed only by their input data. In the first experiment, the analysis was done for a particular reference year over all available datasets. In the second experiment, however, we restricted the data further for only a particular topic area i.e., Education, thereby making it possible to compare whether a control over a topic can be significant for semantic similarity.</p>
 
-                        <h4 id="data-requirements">Data Requirements</h4>
+                        <h3 id="data-requirements">Data Requirements</h3>
                             <p>We decided to conduct our experiment on a <em>simple</em> dataset structure, containing two dimensions; <em>reference area</em>, and <em>reference period</em>, and one measure <em>value</em> for its observation, where the World Bank indicators was a good candidate from the <a href="http://270a.info/">270a Cloud</a>. There was however one minor downside concerning the data quality i.e., the attribute/unit information was incorporated as part of the dataset title, usually as a suffix within brackets. We dealt with this as part of preprocessing in the semantic similarity phase.</p>
 
-                        <h4 id="experiment-workflow-world-bank">World Bank Indicators workflow</h4>
+                        <h3 id="experiment-workflow-world-bank">World Bank Indicators workflow</h3>
                         <p>The workflow of our experiment is summarized as follows:</p>
                         <ol>
                             <li><strong>Correlations for each dataset pair:</strong> We retrieved the 2013 World Bank Indicators datasets, 1406 in total, using SPARQL queries from http://worldbank.270a.info/ linked dataspace. The correlations were computed using R, the statistical software, by joining each dataset pair by their reference area (one of the dimensions of dataset structure), and using their measure values for the correlation coefficient. Based on preliminary inspection for normality distribution on sample datasets, we noted that observations had a non-linear distribution. Hence, we computed Kendall's rank correlation coefficient in our analysis. The information on the analysis we generated consisted of the following headers: <code>datasetX</code>, <code>datasetY</code>, <code>correlation</code>, <code>p-value</code>, <code>n</code>, where <code>datasetX</code> and <code>datasetY</code> are the identifiers for each dataset pair that is being compared. We filtered sample values, <code>n &lt; 10</code>, for the reason being that the sample was not significant enough. The population size i.e., the number of potential reference areas that can have an observation, is 260. That is the number of reference area codes in World Bank classification, however, it is not known as to which reference areas may occur in a given dataset before hand i.e., this information is not publicly available. We retained majority of the values, giving us with the possibility to do further pruning in the future, if we needed.</li>
@@ -205,7 +205,7 @@ What are limitations of your work and open research questions for future work?
 
                     <h2 id="conclusions">Conclusions and Future Work</h2>
                     <p>We believe that the presented work here and the prior <a href="http://csarven.ca/linked-statistical-data-analysis">Linked Statistical Data Analysis</a> effort contributed towards strengthening the relationship between Semantic Web / Linked Data and statistical research.</p>
-                    <p>In the following we discuss some research and application areas that are planned in future work:</p>
+                    <p></p>
 
 
                     <h2 id="acknowledgements">Acknowledgements</h2>
