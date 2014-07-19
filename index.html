@@ -134,6 +134,7 @@ What are limitations of your work and open research questions for future work?
                     <p about="[this:#hypothesis-null]" typeof="sio:SIO_000284" property="rdfs:label">H&#8320; There exists a significant relationship between the semantic similarity of statistical dataset titles and the correlation among those datasets, because dataset titles can indicate rich connectivity.</p>
                     <span about="[this:#variable-semantic-similarity-lsd-titles]" typeof="sio:SIO_000367" property="rdfs:label" content="semantic similarity"></span><span about="[this:#variable-correlation-lsd]" typeof="sio:SIO_000367" property="rdfs:label" content="correlation"></span>
 
+                    <p>We set the significance level to 5% probability.</p>
 
                     <h3 id="semantic-similarity">Linked Statistical Data and Semantic Similarity</h3>
                     <p>The RDF Data Cube vocabulary does not only allow to express statistical data in a Web exchangeable format, but also to represent the (semantic) links within those statistical data. This ability poses some new interesting research questions around the relationship between the statistical and semantic relatedness of datasets. We are interested in the interplay of statistical correlation of LSD and their semantic similarity, in order to answer questions like: does correlation between statistical datasets imply some kind of semantic relation? Do certain semantic links imply the existence of correlation? We propose a generic workflow for studying whether or not this relation between correlation and similarity holds for arbitrary LSD. We aim at generic correlation and similarity measures, and our workflow enables the use of any correlation and similarity indicators. For the specific goal of this paper, though, we stick to the use of Kendall's correlation coefficient and Latent Semantic Analysis (LSA) similarity.</p>
@@ -176,7 +177,7 @@ What are limitations of your work and open research questions for future work?
                         <p>Two experiments were conducted using the same workflow. Experiments differed only by their input data. In the first experiment, the analysis was done for a particular reference year over all available datasets. In the second experiment, however, we restricted the data further for only a particular topic area i.e., Education, thereby making it possible to compare whether a control over a topic can be significant for semantic similarity of dataset titles.</p>
 
                         <h3 id="data-requirements">Data Requirements</h3>
-                            <p>We decided to conduct our experiment on a <em>simple</em> dataset structure, containing two dimensions; <em>reference area</em>, and <em>reference period</em>, and one measure <em>value</em> for its observation, where the World Bank indicators was a good candidate from the <a href="http://270a.info/">270a Cloud</a>. There was however one minor downside concerning the data quality i.e., the attribute/unit information was incorporated as part of the dataset title, usually as a suffix within brackets. We dealt with this by removing the attribute information from the titles as part of preprocessing in the semantic similarity phase.</p>
+                            <p>We decided to conduct our experiment on a <em>simple</em> dataset structure, containing two dimensions; <em>reference area</em>, and <em>reference period</em>, and one measure <em>value</em> for its observations, where the World Bank indicators was a good candidate from the <a href="http://270a.info/">270a Cloud</a>. There was however one minor downside concerning the data quality i.e., the attribute/unit information was incorporated as part of the dataset title, usually as a suffix within brackets. We dealt with this by removing the attribute information from the titles as part of preprocessing in the semantic similarity phase.</p>
 
                         <h3 id="experiment-workflow-world-bank">World Bank Indicators workflow</h3>
                         <p>The workflow of our experiment is summarized as follows:</p>
@@ -193,8 +194,29 @@ What are limitations of your work and open research questions for future work?
 
 
                     <h2 id="results">Results</h2>
-                    <p>Comparability..</p>
+                    <div about="[this:#results]" property="dcterms:description">
+                        <p>All of the experiment results are available at <a href="https://github.com/csarven/lsd-sense">LSD Sense</a> GitHub repository, and can be reproduced. Table [<a href="#experiment-results">Experiment results</a>] provides our findings:</p>
 
+                        <table id="experiment-results">
+                            <caption>Experiment Results</caption>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>All topics</th>
+                                    <th>Only one topic (<em>education</em>)</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr><td colspan="3">Datasets are based on 2012 World Bank indicators</td></tr>
+                            </tfoot>
+                            <tbody>
+                                <tr><th>Correlation</th><td>0.x</td><td>0.x</td></tr>
+                                <tr><th><em>p</em>-value</th><td>&lt; 2.2e-16</td><td>&lt; 2.2e-16</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p>Given that both experiments resulted in <em>p</em>-values that's statistically highly significant and that the strength of the correlation values are weak, we reject our null hypothesis.</p>
+                    </div>
 
                     <h2 id="background">Related Work</h2>
                     <p><a href="http://csarven.ca/linked-statistical-data-analysis">Linked Statistical Data Analysis</a> [<a href=""></a>], explores a way to reuse statistical linked dataspaces, federated queries, and generation of statistical analyses e.g., regression, for humans and machines. By storing computed analysis, it makes it possible for future discovery.</p>
