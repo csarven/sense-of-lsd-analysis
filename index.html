@@ -138,28 +138,30 @@ What are limitations of your work and open research questions for future work?
 
 
                     <h3 id="workflow">Workflow</h3>
-                    <div about="[this:#workflow]">
-                        <a rel="opmw:hasTemplateDiagram" resource="/figure_workflow.svg">Figure</a>
+                    <div about="[this:#workflow]" typeof="opmw:WorkflowTemplate">
+<!--                        <a rel="opmw:hasTemplateDiagram" resource="/figure_workflow.svg">Figure</a>-->
+
+                        <p>Based on preliminary experimentation from data acquisition to analysis, we have created the <span property="rdfs:label">LSD Sense workflow</span>:</p>
 
                         <p>We have adopted the following workflow:</p>
 
-                        <ol typeof="opmw:WorkflowTemplate">
-                            <li about="[this:#workflow-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create hypothesis</li>
+                        <ol>
+                            <li about="[this:#workflow-create-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create hypothesis</li>
                             <li about="[this:#workflow-configure]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Determine datasets and configurations</li>
-                            <li about="[this:#workflow-metadata]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
-                            <li>Get each dataset's observations.</li>
-                            <li>Create correlations and other analysis for each dataset pair combination.</li>
-                            <li>Create dataset metadata subset for semantic similarity.</li>
-                            <li>Create semantic similarity for each dataset pair combination.</li>
-                            <li>Create correlation and other analysis.</li>
-                            <li>Test and verify hypothesis.</li>
-                            <li>Analysis.</li>
+                            <li about="[this:#workflow-get-metadata-lsd]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get metadata of datasets.</li>
+                            <li about="[this:#workflow-get-observations-lsd]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Get each dataset's observations.</li>
+                            <li about="[this:#workflow-create-analysis-lsd]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create correlations and other analysis for each dataset pair combination.</li>
+                            <li about="[this:#workflow-create-preprocess-semantic-similarity]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create dataset metadata subset for semantic similarity.</li>
+                            <li about="[this:#workflow-create-analysis-semantic-similarity]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create semantic similarity for each dataset pair combination.</li>
+                            <li about="[this:#workflow-create-analysis-semantic-similarity-correlation]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Create correlation and other analysis using variables semantic similarity and correlation of LSD.</li>
+                            <li about="[this:#workflow-test-verify-hypothesis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Test and verify hypothesis.</li>
+                            <li about="[this:#workflow-analysis]" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="[this:#workflow]" property="rdfs:label">Analysis.</li>
                         </ol>
                     </div>
 
 
                     <h3 id="implementation">Implementation</h3>
-                    <p>We have an implementation, LSD Sense [] of the workflow above which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
+                    <p>We have an implementation of the LSD Sense workflow [] which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
 
                     <h2 id="experiment">Experiment</h2>
                     <div about="[this:#experiment]" typeof="http://semanticscience.org/resource/SIO_000994">
@@ -177,6 +179,10 @@ What are limitations of your work and open research questions for future work?
 
                             <li><strong>Correlation analysis between semantic similarity and correlation of datasets</strong>: Lastly, we took the absolute values for both variables; <code>|similarity|</code>, <code>|correlation|</code>. We the filtered both similarity and correlation values with 0 or 1, as well as correlation values with <code>p-values &gt; 0.05</code>. For the former, our reason was to exclude potential outliers, or misleading perfect relations, and to exclude insignificant correlations. The final correlation and scatter plot was created by joining the similarity and correlation tables on datasetX and datasetY columns, and with resulting headers: <code>datasetX</code>, <code>datasetY</code>, <code>similarity</code>, <code>correlation</code>, <code>p-value</code>, <code>n</code>. Finally the correlation of the final data table was conducted using the Kendall method. As we were not modeling the relationship (line fitting), we decided to use similarity as the independent variable, and the correlation as the dependent variable.</li>
                         </ol>
+
+                        <h3 id="semantic-similarity">Semantic Similarity</h3>
+                        <p>Semantic Similarity is based on dataset titles...</p>
+                        <p> It is also very possible to come across datasets that differ only by one word e.g., "male" or "female", or age "0-16" or "17-25" etc. The semantic similarity algorithm is based on a "latent semantic index". Essentially it puts each dataset title into a cluster. The number of clusters can be adjusted. Right now, it is using default 200. Hard to qualify what it "should be".</p>
                     </div>
 
 
