@@ -165,7 +165,7 @@ What are limitations of your work and open research questions for future work?
                     <p>We have an implementation of the LSD Sense workflow [] which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
 
                     <p>Semantic Similarity is based on dataset titles... and LSA stuff..</p>
-                    <p> It is also very possible to come across datasets that differ only by one word e.g., "male" or "female", or age "0-16" or "17-25" etc. The semantic similarity algorithm is based on a "latent semantic index". Essentially it puts each dataset title into a cluster. The number of clusters can be adjusted. Right now, it is using default 200. Hard to qualify what it "should be".</p>
+                    <p> It is also very possible to come across datasets that differ only by one word e.g., "male" or "female", or age "0-16" or "17-25" etc. The semantic similarity algorithm is based on a "latent semantic index". Essentially it puts each dataset title into a cluster. The number of clusters can be adjusted. Right now, it is using default 200. Hard to qualify what it "should be", and it remains an open research question. Generally, research has demonstrated that optimal values depend on the size and nature of the dataset. About 300 dimensions will usually provide best results with document collections of 10<sup>5</sup> elements, and eventually 400 dimensions for 10<sup>6</sup> documents. The maximum number of dimensions is set to the number of documents in the collection.</p>
 
 
                     <h2 id="experiment">Experiment</h2>
