@@ -150,7 +150,7 @@ white-space:pre;
 
 * + h4:before,
 caption:before,
-figure:before,
+.figure:before,
 * + h5:before,
 h4 + h5:before {
 content:"\A";
