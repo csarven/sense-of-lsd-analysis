@@ -158,14 +158,14 @@ What are limitations of your work and open research questions for future work?
 
 
                     <h3 id="implementation">Implementation</h3>
-                    <p>We have an implementation of the LSD Sense workflow [] which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
+                    <p>We have an implementation of the <a href="https://github.com/csarven/lsd-sense">LSD Sense</a> workflow [<a href="#r_"></a>] which can be used to both, reproduce our experiments, as well as run it on new input datasets. With the exception of determining which datasets to inspect, and the system configuration, LSD Sense is automated.</p>
 
                     <h4>Semantic Similarity</h4>
                     <p>The semantic similarity algorithm is based on a <em>Latent Semantic Index</em> (LSI). We use the dataset titles to check for their similarity. Essentially, LSI puts each dataset title into a cluster. The number of clusters can be adjusted (default to 200). It remains as an open research question as to what it should be. Generally, research has demonstrated that optimal values depend on the size and nature of the dataset. [XXX: Citation here?].</p>
 
                     <p>Concerning the quality of the dataset titles, it is possible to come across datasets that differ only by one word e.g., <q>male</q>, <q>female</q>, or age <q>0-16</q>, <q>17-25</q> etc. This potentially lowers the accuracy to differentiate datasets. As mentioned earlier, we removed the attribute information from the dataset titles with the assumption that it reduced noise.</p>
 
-                    <p>We reuse parts of X in our own implementation, <a href="https://github.com/albertmeronyo/SemanticCorrelation">Semantic Correlation</a> [<a href="#r_"></a>] for LSD Sense.</p>
+                    <p>We use <a href="http://radimrehurek.com/gensim/index.html">gensim</a> [<a href="#r_"></a>] in our own implementation, <a href="https://github.com/albertmeronyo/SemanticCorrelation">Semantic Correlation</a> [<a href="#r_"></a>] for LSD Sense.</p>
 
                     <h2 id="experiment">Experiment</h2>
                     <div about="[this:#experiment]" typeof="http://semanticscience.org/resource/SIO_000994">
