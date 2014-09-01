@@ -5,6 +5,37 @@
  * @link      http://csarven.ca/
  */
 
+/*
+LNCS template styles: http://www.springer.com/computer/lncs?SGWID=0-164-6-793341-0
+
+Computer Modern Unicode fonts are from http://canopus.iacp.dvo.ru/~panov/cm-unicode/ with X11 License.
+*/
+
+@font-face {
+font-family: "CMU Serif";
+src: local("CMU Serif"), url("cmunrm.otf");
+}
+@font-face {
+font-family: "CMU Serif Bold";
+src: local("CMU Serif Bold"), url("cmunbx.otf");
+font-weight: bold !important;
+}
+@font-face {
+font-family: "CMU Serif Italic";
+src: local("CMU Serif Italic"), url("cmunti.otf");
+font-style: italic, oblique !important;
+}
+@font-face {
+font-family: "CMU Serif Bold Italic";
+src: local("CMU Serif Bold Italic"), url("cmunbi.otf");
+font-weight: bold;
+font-style: italic, oblique;
+}
+@font-face {
+font-family: "CMU Serif Monospace";
+src: local("CMU Serif Monospace"), url("cmuntt.otf");
+}
+
 * { margin:0; padding:0; background: transparent !important; color: #000 !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
 img { display:block; border:0; }
 a abbr { cursor: pointer; border-bottom:0; }
@@ -54,14 +85,25 @@ word-break:normal;
 body {
 background-color:#FFFFFF;
 color:#000000;
-font-family:"Latin Modern Roman", "Computer Modern", cmr10, "Times New Roman", serif;
+font-family: "CMU Serif", "Latin Modern Roman", "Computer Modern", cmr10, "Times New Roman", serif;
 font-size:13px;
 line-height:1.22;
 position:relative;
 margin:0 auto;
 width:122mm;
 height:193mm;
+}
 
+
+h1,h2,h3,h4,h5,h6, strong, dt {
+font-family: "CMU Serif Bold", sans-serif !important;
+}
+em, address {
+font-family: "CMU Serif Italic", sans-serif !important;
+font-style:normal !important;
+}
+code, pre, kbd {
+font-family: "CMU Serif Monospace", monospace !important;
 }
 
 p {
@@ -196,13 +238,14 @@ width:106.1%;
 line-height:1;
 }
 
-#author_emails,
 #author_orgs,
+#author_uris,
 #abstract p {
 font-size:12px;
 }
 
-#author_emails {
+#author_emails,
+#author_uris {
 font-family:monospace;
 font-size:11px;
 }
@@ -226,12 +269,14 @@ margin-bottom:0;
 
 #authors dd:after,
 #author_emails li:after,
-#author_orgs li:after {
+#author_orgs li:after,
+#author_uris li:after {
 content:", ";
 }
 #authors dd:last-child:after,
 #author_emails li:last-child:after,
-#author_orgs li:last-child:after {
+#author_orgs li:last-child:after,
+#author_uris li:last-child:after {
 content:"";
 }
 #authors sup {
@@ -353,6 +398,10 @@ margin-left:0;
 text-align:justify;
 }
 
+p + dl {
+margin-top:1.25em;
+}
+
 dt {
 font-weight:bold;
 margin-bottom:0.5em;
@@ -410,7 +459,7 @@ margin:0 1cm 1em;
 }
 
 #abstract h2,
-#document-identifier  h2,
+#document-identifier dt,
 #categories-and-subject-descriptors  h2,
 #keywords h2 {
 font-size:13px;
@@ -448,7 +497,7 @@ content:"";
 
 #categories-and-subject-descriptors h2,
 #keywords h2,
-#document-identifier h2 {
+#document-identifier dt {
 text-transform:capitalize;
 }
 
@@ -477,9 +526,13 @@ display:none;
 }
 
 
-/*Bring these back to life*/
 #document-purpose,
 #document-submitted,
 #document-license {
 display:none;
+}
+#document-purpose.on,
+#document-submitted.on,
+#document-license.on {
+display:block;
 }
