@@ -1,8 +1,8 @@
 /** LNCS
  *
- * @author    Sarven Capadisli <info@csarven.ca>
- * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link      http://csarven.ca/
+ * Sarven Capadisli <info@csarven.ca> http://csarven.ca/#i
+ * http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * https://github.com/csarven/linked-research
  */
 
 /*
@@ -53,11 +53,13 @@ thead { display: table-header-group; }
 table, img, object, .figure { page-break-inside: avoid; }
 img, object { max-width:100% !important; height:auto !important }
 
+object[width="100%"] { max-width:480px !important; }
 object[width="640"] { max-width:480px !important; }
 object[height="480"] { height:360px !important; }
 object[height="415"] { height:311px !important; }
 
 object.slides { display:none; }
+a.block { display:block; }
 
 @page {
 /*Standard ISO A4 paper dimensions are:*/
@@ -74,6 +76,8 @@ a {
 text-decoration:none;
 color:#000;
 }
+abbr { border-bottom: none; }
+
 
 #references {
 /*page-break-before: always;*/
@@ -110,9 +114,12 @@ em, address {
 font-family: "CMU Serif Italic", sans-serif !important;
 font-style:normal !important;
 }
-code, pre, kbd, button {
+code, pre, kbd, button,
+#references a {
 font-family: "CMU Serif Monospace", monospace !important;
 }
+
+cite { font-style:normal; }
 
 p {
 text-indent:1em;
@@ -174,7 +181,8 @@ h2 + p,
 h3 + p,
 h4 + p,
 h5 + p,
-div > p:first-child {
+div > p:first-child,
+dl + p {
 text-indent:0;
 }
 h1 + p {
@@ -228,7 +236,8 @@ h4 + p:after,
 h5 + p:after,
 h4 + div p:after,
 h5 + div p:after,
-section + p:before {
+section + p:before,
+section + dl:before {
 content:"\A";
 white-space:pre;
 }
@@ -254,11 +263,6 @@ display:inline;
 pre {
 margin:1em 0;
 font-size:0.875em;
-}
-
-code {
-font-size:11px;
-font-family:monospace;
 }
 
 
@@ -410,15 +414,12 @@ margin-bottom:1em;
 .figure {
 margin-top:1em;
 margin-bottom:1em;
+position:relative;
 }
 
 .figure p {
 text-indent:0;
 text-align:left;
-}
-
-.figure pre {
-margin-top:-1em;
 }
 
 .figure-column-2 {
